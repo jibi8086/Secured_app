@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SecureAppRepoInterface\SecureAppRepoInterface.csproj" />
+    <ProjectReference Include="..\SecureAppRepo\SecureAppRepo.csproj" />
+    <ProjectReference Include="..\SecureAppServiceInterface\SecureAppServiceInterface.csproj" />
+  </ItemGroup>
+
+</Project>

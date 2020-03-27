@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.10" />
+    <PackageReference Include="System.Drawing.Common" Version="4.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SecureAppCommon\SecureAppCommon.csproj" />
+    <ProjectReference Include="..\SecureAppRepoInterface\SecureAppRepoInterface.csproj" />
+    <ProjectReference Include="..\SecureAppRepo\SecureAppRepo.csproj" />
+    <ProjectReference Include="..\SecureAppServiceInterface\SecureAppServiceInterface.csproj" />
+    <ProjectReference Include="..\SecureAppService\SecureAppService.csproj" />
+  </ItemGroup>
+
+</Project>
