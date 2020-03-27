@@ -7,6 +7,7 @@ using SecureAppServiceInterface;
 using Syncfusion.Pdf.Parsing;
 using Syncfusion.Pdf.Security;
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace SecureAppService
@@ -26,6 +27,15 @@ namespace SecureAppService
             FileDetail fileDetail = MapToFileDetails(formFile);
             EncryptDocument(formFile, fileDetail);
             return SaveFileDetailToDatabase(fileDetail);
+        }
+
+        public List<FileDetail> GetAllFiles()
+        {
+            return _fileDetailRepo.GetFileDetails();
+        }
+        public FileDetail GetFileById(int fileId)
+        {
+            return _fileDetailRepo.GetFileById(fileId);
         }
 
         #region Private Methods
@@ -69,6 +79,8 @@ namespace SecureAppService
         {
             return _fileDetailRepo.SaveFileDetail(fileDetail);
         }
+
+
         #endregion
     }
 }

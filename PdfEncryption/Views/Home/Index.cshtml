@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using SecureAppCommon;
+@model List<FileDetail>;
+<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -10,6 +12,8 @@
 	<link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
 	<!-- Ionicons -->
 	<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+	<!-- Toastr -->
+	<link rel="stylesheet" href="../../plugins/toastr/toastr.min.css">
 	<!-- Theme style -->
 	<link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 	<!-- Google Font: Source Sans Pro -->
@@ -17,21 +21,40 @@
 </head>
 <body class="hold-transition sidebar-mini">
 	<div class="wrapper">
-		<!-- Navbar -->	
+		<!-- /.modal -->
+
+		<div class="modal fade" id="modal-info">
+			<div class="modal-dialog">
+				<div class="modal-content bg-info">
+					<div class="modal-header">
+						<h4 class="modal-title">Check your mail for password</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-footer justify-content-between">
+						<button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
+		<!-- Navbar -->
 		<!-- /.navbar -->
 		<!-- Main Sidebar Container -->
-
 		<!-- Content Wrapper. Contains page content -->
-		<div class="content-wrapper">
+		<div class="content-wrapper" style="margin-left: 0;">
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<div class="container-fluid">
 					<div class="row mb-2">
 						<div class="col-sm-10">
-							<h1>Simple Tables</h1>
+							<h1>Uploaded Files</h1>
 						</div>
 						<div class="col-sm-2">
-							<a href="@Url.Action("Upload", "Home")" class="btn btn-default btn-light">Upload</a>							
+							<a href="@Url.Action("Upload", "Home")" class="btn btn-primary">Upload</a>
 						</div>
 					</div>
 				</div><!-- /.container-fluid -->
@@ -45,16 +68,16 @@
 						<div class="col-md-12">
 							<div class="card">
 								<div class="card-header">
-									<h3 class="card-title">Simple Full Width Table</h3>
+									@*<h3 class="card-title">Simple Full Width Table</h3>*@
 
 									<div class="card-tools">
-										<ul class="pagination pagination-sm float-right">
-											<li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-											<li class="page-item"><a class="page-link" href="#">1</a></li>
-											<li class="page-item"><a class="page-link" href="#">2</a></li>
-											<li class="page-item"><a class="page-link" href="#">3</a></li>
-											<li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-										</ul>
+										@*<ul class="pagination pagination-sm float-right">
+												<li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+												<li class="page-item"><a class="page-link" href="#">1</a></li>
+												<li class="page-item"><a class="page-link" href="#">2</a></li>
+												<li class="page-item"><a class="page-link" href="#">3</a></li>
+												<li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+											</ul>*@
 									</div>
 								</div>
 								<!-- /.card-header -->
@@ -63,52 +86,27 @@
 										<thead>
 											<tr>
 												<th style="width: 10px">#</th>
-												<th>Task</th>
-												<th>Progress</th>
-												<th style="width: 40px">Label</th>
+												<th>FileName</th>
+												<th>FilePath</th>
+												<th>Uploaded Date</th>
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td>1.</td>
-												<td>Update software</td>
-												<td>
-													<div class="progress progress-xs">
-														<div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-													</div>
-												</td>
-												<td><span class="badge bg-danger">55%</span></td>
-											</tr>
-											<tr>
-												<td>2.</td>
-												<td>Clean database</td>
-												<td>
-													<div class="progress progress-xs">
-														<div class="progress-bar bg-warning" style="width: 70%"></div>
-													</div>
-												</td>
-												<td><span class="badge bg-warning">70%</span></td>
-											</tr>
-											<tr>
-												<td>3.</td>
-												<td>Cron job running</td>
-												<td>
-													<div class="progress progress-xs progress-striped active">
-														<div class="progress-bar bg-primary" style="width: 30%"></div>
-													</div>
-												</td>
-												<td><span class="badge bg-primary">30%</span></td>
-											</tr>
-											<tr>
-												<td>4.</td>
-												<td>Fix and squish bugs</td>
-												<td>
-													<div class="progress progress-xs progress-striped active">
-														<div class="progress-bar bg-success" style="width: 90%"></div>
-													</div>
-												</td>
-												<td><span class="badge bg-success">90%</span></td>
-											</tr>
+											@for (int i = 0; i < Model.Count; i++)
+											{
+												<tr>
+													<td>@(i + 1)</td>
+													<td>@Model[i].FileName</td>
+													<td>@Model[i].FilePath</td>
+													<td>@Model[i].UploadedDate</td>
+													<td>
+														<a style="cursor:pointer" data-filename="@Model[i].FileName" class="fileuploaded" href="#">
+															<i class="fileuploaded fa fa-file-pdf fa-2x"
+															   style="color:#b10e0e;cursor:pointer" aria-hidden="true"></i>
+														</a>
+													</td>
+												</tr>
+											}
 										</tbody>
 									</table>
 								</div>
@@ -146,9 +144,26 @@
 	<script src="../../plugins/jquery/jquery.min.js"></script>
 	<!-- Bootstrap 4 -->
 	<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<!-- Toastr -->
+	<script src="../../plugins/toastr/toastr.min.js"></script>
 	<!-- AdminLTE App -->
 	<script src="../../dist/js/adminlte.min.js"></script>
 	<!-- AdminLTE for demo purposes -->
 	<script src="../../dist/js/demo.js"></script>
 </body>
 </html>
+<script>
+	$(".fileuploaded").click(function (e) {
+		//antonytodo send email from here
+		e.preventDefault();
+		$("#modal-info").modal('show')
+
+		var fileName = $(this).data("filename");
+		setTimeout(() => {
+			window.location.href = '../AppData/' + fileName;
+		}, 3000)
+
+
+
+	});
+</script>

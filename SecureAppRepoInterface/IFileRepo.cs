@@ -9,5 +9,6 @@ namespace SecureAppRepoInterface
     {
         bool SaveFileDetail(FileDetail fileDetail);
         List<FileDetail> GetFileDetails();
+        FileDetail GetFileById(int fileId);
     }
 }

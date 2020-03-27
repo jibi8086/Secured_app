@@ -1,7 +1,9 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PdfEncryption.Models;
+using SecureAppCommon;
 using SecureAppServiceInterface;
 
 namespace PdfEncryption.Controllers
@@ -16,7 +18,8 @@ namespace PdfEncryption.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            List<FileDetail> fileDetails= _fileService.GetAllFiles();
+            return View(fileDetails);
         }
 
         public IActionResult About()
@@ -53,6 +56,11 @@ namespace PdfEncryption.Controllers
         {
             _fileService.ProcessFile(uploadedFile);
             return Ok();
+        }
+        [HttpGet]
+        public FileDetail GetFileDetail(int fileId)
+        {
+            return _fileService.GetFileById(fileId);
         }
     }
 }

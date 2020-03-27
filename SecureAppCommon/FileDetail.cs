@@ -11,5 +11,6 @@ namespace SecureAppCommon
         public string FileName { get; set; }
         public string FilePath { get; set; }
         public string FilePassword { get; set; }
+        public DateTime UploadedDate { get; set; }
     }
 }

@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Data;
-using System.Data.SqlClient;
 using System.IdentityModel.Tokens.Jwt;
 using System.IO;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +11,6 @@ using Microsoft.IdentityModel.Tokens;
 using PdfEncryption.Models;
 using SecureAppCommon;
 using SecureAppServiceInterface;
-//using SecureAppServiceInterface;
 
 namespace PdfEncryption.Controllers
 {
