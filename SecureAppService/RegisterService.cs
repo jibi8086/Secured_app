@@ -1,9 +1,6 @@
 ﻿using SecureAppCommon;
 using SecureAppRepoInterface;
 using SecureAppServiceInterface;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SecureAppService
 {

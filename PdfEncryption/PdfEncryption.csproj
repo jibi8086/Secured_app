@@ -20,4 +20,8 @@
     <ProjectReference Include="..\SecureAppService\SecureAppService.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\AppData\" />
+  </ItemGroup>
+
 </Project>

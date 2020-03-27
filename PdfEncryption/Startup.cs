@@ -43,6 +43,9 @@ namespace PdfEncryption
 
             services.TryAdd(ServiceDescriptor.Scoped(typeof(IRegisterService), typeof(RegisterService)));
             services.TryAdd(ServiceDescriptor.Scoped(typeof(IRegisterRepo), typeof(RegisterRepo)));
+            services.TryAdd(ServiceDescriptor.Scoped(typeof(IFileService), typeof(FileService)));
+            services.TryAdd(ServiceDescriptor.Scoped(typeof(IFileRepo), typeof(FileRepo)));
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

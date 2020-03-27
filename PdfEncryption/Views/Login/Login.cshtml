@@ -110,7 +110,7 @@
                         if (response.token != null &&response.token != ""  && response.Blocked != true) {
                             window.localStorage.setItem('token', response.token);
                             window.localStorage.setItem('username', response.userEmail);
-                            window.location.href = '/AdminHome/AdminIndex/';
+                            window.location.href = '/Home/Index';
                         }
                         else if (response.blocked == true) {
                             window.localStorage.setItem('token', null);

@@ -1,15 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PdfEncryption.Models;
+using SecureAppServiceInterface;
 
 namespace PdfEncryption.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IFileService _fileService;
+
+        public HomeController(IFileService fileService)
+        {
+            _fileService = fileService;
+        }
         public IActionResult Index()
         {
             return View();
@@ -38,6 +42,17 @@ namespace PdfEncryption.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        [HttpGet]
+        public IActionResult Upload()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Upload(IFormFile uploadedFile)
+        {
+            _fileService.ProcessFile(uploadedFile);
+            return Ok();
         }
     }
 }
