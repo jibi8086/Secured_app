@@ -62,7 +62,7 @@ namespace SecureAppRepo
             return fileDetails;
         }
 
-        public bool SaveFileDetail(FileDetail fileDetail)
+        public bool SaveFileDetail(FileDetail fileDetail, ProcessResult processResult)
         {
             try
             {
@@ -76,13 +76,17 @@ namespace SecureAppRepo
                         cmd.Parameters.Add("@FileName", SqlDbType.VarChar).Value = fileDetail.FileName;
                         cmd.Parameters.Add("@FilePath", SqlDbType.VarChar).Value = fileDetail.FilePath;
                         cmd.Parameters.Add("@FilePassword", SqlDbType.VarChar).Value = fileDetail.FilePassword;
+                        processResult.processResults.Add(
+                            new ProcessResult { IsSuccess = true, Message = "File details Successfully saved to DB" });
                         return (cmd.ExecuteNonQuery() > 1) ? true : false;
                     }
                 }
             }
             catch (Exception ex)
             {
-                throw ex;
+                processResult.processResults.Add(
+                    new ProcessResult { IsSuccess = true, Message = ex.Message });
+                return false;
             }
         }
 

@@ -54,8 +54,9 @@ namespace PdfEncryption.Controllers
         [HttpPost]
         public IActionResult Upload(IFormFile uploadedFile)
         {
-            _fileService.ProcessFile(uploadedFile);
-            return RedirectToAction("Index");
+            ProcessResult processResult= _fileService.ProcessFile(uploadedFile);
+            ViewBag.ProcessResult = processResult;
+            return View();
         }
         [HttpGet]
         public FileDetail GetFileDetail(int fileId)

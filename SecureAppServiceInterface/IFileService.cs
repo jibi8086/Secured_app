@@ -6,7 +6,7 @@ namespace SecureAppServiceInterface
 {
     public interface IFileService
     {
-        bool ProcessFile(IFormFile formFile);
+        ProcessResult ProcessFile(IFormFile formFile);
         List<FileDetail> GetAllFiles();
         FileDetail GetFileById(int fileId);
     }
